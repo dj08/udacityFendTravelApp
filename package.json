@@ -1,15 +1,16 @@
 {
-   "name": "udacity_weather_journal_app",
+   "name": "udacity_frontend_travel_app",
    "version": "1.0.0",
-   "description": "Weather Journal App for Udacity Frontend Nanodegree course.",
-   "main": "server.js",
+   "description": "Capstone Project Travel App for Udacity Frontend Nanodegree course.",
    "scripts": {
       "test": "echo 'No test specified' && exit 1",
-      "start": "node server.js",
-      "monitor": "npx nodemon server.js"
+      "monitor": "npx nodemon src/server/server.js",
+      "start": "node server.js"
    },
    "keywords": [
       "udacity",
+      "capstone",
+      "travel-app",
       "frontend",
       "nanodegree",
       "openweather"
