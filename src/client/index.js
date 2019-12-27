@@ -1,4 +1,9 @@
 import submitHandler from './js/app.js';
+// Need this to get async/await working with babel translation
+import 'regenerator-runtime/runtime';
+
+// import css
+import './styles/style.scss';
 
 // Need to install event handlers here, since they would not be
 // visibile elsewhere due to webpack scoping. We use DOMContentLoaded

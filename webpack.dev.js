@@ -11,7 +11,11 @@ module.exports = {
 	logging: 'verbose',
 	colors: true,
     },
-    entry: './src/client/index.js',
+    entry: [
+	// This is needed for babel to understand async/await
+	'./node_modules/regenerator-runtime/runtime',
+	'./src/client/index.js'
+    ],
     output: {
 	libraryTarget: 'var',
 	library: 'Client'
