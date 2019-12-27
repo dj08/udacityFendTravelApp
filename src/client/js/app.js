@@ -27,7 +27,7 @@ const postData = async (url = '', data = {}) => {
         console.log(newData);
         return newData
     } catch(error) {
-        console.log("error", error);
+        presentErr("Failed to save data: ", error);
         // appropriately handle the error
     } 
 };
@@ -47,7 +47,7 @@ const uiUpdateHelper = (id, data) =>
 
 // Function to update UI after all else is done
 const updateUi = async () => {
-    const resp = await fetch('/getData');
+    const resp = await fetch('https://localhost:8081/getData');
     try {
         const savedData = await resp.json();
         uiUpdateHelper('date', savedData.date);
@@ -67,7 +67,7 @@ export default function submitHandler (ev) {
     
     getWeather(owmApiUrl, zip, owmApiKey)
         .then(data => {
-            postData('/saveData',
+            postData('https://localhost:8081/saveData',
                      {zip: zip, userFeelings: feelings,
                       temperature: data.main.temp, date: newDate})
         })

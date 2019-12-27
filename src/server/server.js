@@ -1,7 +1,7 @@
 // Server side code for Weather Journal project.
 
 // My project constants
-const servePort = 8080;
+const servePort = 8081;
 let projectData = {}; // Object to hold API endpoint data
 
 // Set up express server and sisters
@@ -27,7 +27,7 @@ app.get('/getData', (req, res) => {
     res.send(projectData);
 });
 
-app.post('/saveData', async (req, res) => {
+app.post('/saveData', (req, res) => {
     projectData = req.body;
     console.log(`Saved data: `, projectData);
 });
