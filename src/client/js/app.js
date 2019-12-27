@@ -15,21 +15,21 @@ const presentErr = console.log; // Error presentation function
 // Method to post data to backend server
 const postData = async (url = '', data = {}) => {
     try {
-	const response = await fetch(url, {
+        const response = await fetch(url, {
             method: 'POST',
             credentials: 'same-origin',
             headers: {
-		'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
-	});
+        });
         const newData = await response.json();
         console.log(newData);
         return newData
     } catch(error) {
-	console.log("error", error);
-	// appropriately handle the error
-    }; 
+        console.log("error", error);
+        // appropriately handle the error
+    } 
 };
 
 // Async GET function to query weather
@@ -38,7 +38,7 @@ const getWeather = async (owmUrl, zip, apiKey) => {
     try {
         const weather = await apiResponse.json();
         return weather;
-    } catch (error) { presentErr(`Failed to get weather: ${error}`) };
+    } catch (error) { presentErr(`Failed to get weather: ${error}`) }
 };
 
 // Need to update UI using vanilla JS as per rubric
@@ -58,19 +58,21 @@ const updateUi = async () => {
     }
 };
 
-// Event listener for the generate button
-document.getElementById('generate').addEventListener('click', ev => {
+// Event listener for the submit button
+// export default enables us to import this in index.js without curly
+// braces
+export default function submitHandler (ev) {
     const zip = document.getElementById('zip').value;
     const feelings = document.getElementById('feelings').value;
     
     getWeather(owmApiUrl, zip, owmApiKey)
         .then(data => {
             postData('/saveData',
-		     {zip: zip, userFeelings: feelings,
+                     {zip: zip, userFeelings: feelings,
                       temperature: data.main.temp, date: newDate})
-	})
+        })
         .then(res => updateUi()) // Apparently the res arg is needed
-				 // for requests to happen in right order.11
-	.catch(error => presentErr(`Miscellaneous app error: ${error}`));   
-});
+                                 // for requests to happen in right order.11
+        .catch(error => presentErr(`Miscellaneous app error: ${error}`));   
+}
 
