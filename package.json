@@ -5,6 +5,7 @@
    "scripts": {
       "test": "echo 'No test specified' && exit 1",
       "monitor": "nodemon src/server/server.js",
+      "build:dev": "webpack-dev-server --config webpack.dev.js --open",
       "start": "node server.js"
    },
    "keywords": [
@@ -39,6 +40,7 @@
       "sass": "^1.24.0",
       "sass-loader": "^8.0.0",
       "style-loader": "^1.1.2",
-      "webpack-bundle-analyzer": "^3.6.0"
+      "webpack-bundle-analyzer": "^3.6.0",
+      "webpack-dev-server": "^3.10.1"
    }
 }
