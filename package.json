@@ -4,7 +4,7 @@
    "description": "Capstone Project Travel App for Udacity Frontend Nanodegree course.",
    "scripts": {
       "test": "echo 'No test specified' && exit 1",
-      "monitor": "npx nodemon src/server/server.js",
+      "monitor": "nodemon src/server/server.js",
       "start": "node server.js"
    },
    "keywords": [
