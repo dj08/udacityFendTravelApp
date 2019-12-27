@@ -11,7 +11,7 @@ module.exports = {
 	logging: 'verbose',
 	colors: true,
     },
-    entry: './src/index.js',
+    entry: './src/client/index.js',
     output: {
 	libraryTarget: 'var',
 	library: 'Client'
@@ -42,7 +42,7 @@ module.exports = {
     },
     plugins: [
 	new HtmlWebPackPlugin({
-	    template: './src/views/index.html',
+	    template: './src/client/views/index.html',
 	    filename: './index.html'
 	}),
 	new CleanWebpackPlugin({
