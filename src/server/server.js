@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Server static webpage from website folder
-app.use(express.static('../client'));
+app.use(express.static('./src/client/views/'));
 
 const server = app.listen(servePort, _ => {
     console.log(`Running on ${os.hostname().toLowerCase()}.local:${servePort}`);
