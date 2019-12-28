@@ -1,10 +1,29 @@
-// Frontend ctmux ode for Weather Journal App
+// Frontend javascript for Travel app
 
-// Setup for OpenWeatherMap API
-const owmApiKey = '12519067d9a80da46f35d8e349bf4cab';
-const owmApiUrl = (zip, apiKey) =>
-      'https://api.openweathermap.org/data/2.5/weather' +
-      `?zip=${zip},us&units=imperial&appid=${apiKey}`;
+// Setup for GeoNames API. Rubric needs this info in the main app.js
+const geonamesUrl = 'http://api.geonames.org/postalCodeSearchJSON';
+const geonamesUser = 'deejay08';
+const coordQueryUrl = (place, user) => {
+    // Need to handle input like 'City, State' as well as 'City State'
+    const placeWithoutSpaces = place.replace(/\s+/g, ',');
+    console.log("fetching for ", placeWithoutSpaces);
+    return `${geonamesUrl}?placename=${place}&username=${user}` +
+        '&maxRows=2&style=short';
+};
+
+export async function getLocationCoordinates (ev) {
+    const location = document.getElementById('city').value;
+    fetch(coordQueryUrl(location, geonamesUser))
+        .then(res => res.json())
+        .then(res => {
+            console.log("Received data: ", res);
+            const place = res.postalCodes.shift();
+            const city = place.placeName;
+            const country = place.countryCode;
+            document.getElementById('upcoming-trip-location').innerHTML =
+                `${city}, ${country}`;
+        });
+}
 
 // Create a new date instance dynamically with JS
 const d = new Date();

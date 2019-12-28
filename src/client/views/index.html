@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Journal</title>
     <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
@@ -9,12 +8,28 @@
   <body>
     <div id = "app">
       <div class ="holder headline">
-        Weather Journal App
+        Travel Planner
       </div>
-      <div class ="holder zip">
-        <label for="zip">Enter Zipcode here</label>
-        <input type="text" id="zip" placeholder="enter zip code here">
+
+      <div class="holder travel-details" id="upcoming-trip">
+	<!-- Upcoming itinerary information -->
+	<div class="holder city-details">
+	  <p>My trip to: <div id="upcoming-trip-location"></div></p>
+	</div>
       </div>
+
+      <div class="holder travel-details" id="new-trip-details">
+	<!-- new location input entry form -->
+	<div class="holder city-details">
+          <label for="new-city">My trip to:</label>
+          <input type="new-text" id="city" placeholder="Enter Location Here">
+	</div>
+	<div class="holder date-entry">
+	  <label for="travel-date">Departing:</label>
+	  <input type="date" id="new-travel-date" min="2019-12-28" max="2020-12-28">
+	</div>
+      </div>
+
       <div class ="holder feel">
         <label for="feelings">How are you feeling today?</label>
         <textarea class= "myInput" id="feelings"

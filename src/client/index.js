@@ -1,4 +1,5 @@
-import submitHandler from './js/app.js';
+import { submitHandler, getLocationCoordinates } from './js/app.js';
+
 // Need this to get async/await working with babel translation
 import 'regenerator-runtime/runtime';
 
@@ -11,6 +12,9 @@ import './styles/style.scss';
 // handles js insertion in our HTML view.
 document.addEventListener('DOMContentLoaded', _ => {
     const submitButton = document.getElementById('submit');
-    submitButton.addEventListener('click', submitHandler);
+    submitButton.addEventListener('click', Client.getLocationCoordinates);
 });
 
+export {
+    getLocationCoordinates
+};
