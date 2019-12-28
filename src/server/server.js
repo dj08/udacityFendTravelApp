@@ -1,7 +1,9 @@
 // Server side code for Weather Journal project.
 
 // My project constants
-const servePort = 8081;
+// Backend port is noted as a global constant to share the setting
+// with webpack. This enables proxying requests during development
+const servePort = require('../../CONSTANTS').BACKEND_PORT;
 let projectData = {}; // Object to hold API endpoint data
 
 // Set up express server and sisters
