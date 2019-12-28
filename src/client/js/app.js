@@ -13,24 +13,27 @@ const newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 const presentErr = console.log; // Error presentation function
 
 // Method to post data to backend server
-const postData = async (url = '', data = {}) => {
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-        const newData = await response.json();
-        console.log(newData);
-        return newData
-    } catch(error) {
-        presentErr("Failed to save data: ", error);
-        // appropriately handle the error
-    } 
-};
+function postData (url = '', data = {}) {
+    let newData = {};
+    fetch(url, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            newData = res;
+        })
+          .catch(err => {
+              presentErr("Failed to save data: ", error);
+          });
+    console.log(newData);
+    return newData;
+}
 
 // Async GET function to query weather
 const getWeather = async (owmUrl, zip, apiKey) => {
@@ -47,7 +50,7 @@ const uiUpdateHelper = (id, data) =>
 
 // Function to update UI after all else is done
 const updateUi = async () => {
-    const resp = await fetch('https://localhost:8081/getData');
+    const resp = await fetch('http://localhost:8081/getData');
     try {
         const savedData = await resp.json();
         uiUpdateHelper('date', savedData.date);
@@ -67,12 +70,12 @@ export default function submitHandler (ev) {
     
     getWeather(owmApiUrl, zip, owmApiKey)
         .then(data => {
-            postData('https://localhost:8081/saveData',
+            postData('http://localhost:8081/saveData',
                      {zip: zip, userFeelings: feelings,
                       temperature: data.main.temp, date: newDate})
         })
         .then(res => updateUi()) // Apparently the res arg is needed
-                                 // for requests to happen in right order.11
+    // for requests to happen in right order.11
         .catch(error => presentErr(`Miscellaneous app error: ${error}`));   
 }
 
