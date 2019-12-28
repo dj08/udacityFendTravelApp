@@ -1,4 +1,4 @@
-// Frontend code for Weather Journal App
+// Frontend ctmux ode for Weather Journal App
 
 // Setup for OpenWeatherMap API
 const owmApiKey = '12519067d9a80da46f35d8e349bf4cab';
@@ -47,7 +47,7 @@ const uiUpdateHelper = (id, data) =>
 
 // Function to update UI after all else is done
 const updateUi = async () => {
-    const resp = await fetch('http://localhost:8081/getData');
+    const resp = await fetch('/getData');
     try {
         const savedData = await resp.json();
         uiUpdateHelper('date', savedData.date);
@@ -67,7 +67,7 @@ export default function submitHandler (ev) {
     
     getWeather(owmApiUrl, zip, owmApiKey)
         .then(data => {
-            postData('http://localhost:8081/saveData',
+            postData('/saveData',
                      {zip: zip, userFeelings: feelings,
                       temperature: data.main.temp, date: newDate})
         })
