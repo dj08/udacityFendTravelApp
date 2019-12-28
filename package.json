@@ -5,7 +5,7 @@
    "scripts": {
       "test": "echo 'No test specified' && exit 1",
       "devel-server": "nodemon src/server/server.js",
-      "devel-build": "webpack-dev-server --config webpack.dev.js --open",
+      "devel-build": "webpack-dev-server --config webpack.dev.js --open firefox",
       "prod-server": "node src/server/server.js",
       "prod-build": "webpack --config webpack.prod.js",
       "start-dev": "npm-run-all --parallel devel-*",
