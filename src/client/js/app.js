@@ -3,12 +3,27 @@
 // Setup for GeoNames API. Rubric needs this info in the main app.js
 const geonamesUrl = 'http://api.geonames.org/postalCodeSearchJSON';
 const geonamesUser = 'deejay08';
-const coordQueryUrl = place => {
+const coordQueryUrl = (place, user) => {
     // Need to handle input like 'City, State' as well as 'City State'
     const placeWithoutSpaces = place.replace(/\s+/g, ',');
-    return `${geonamesUrl}?placename=${place}&username=${geonamesUser}` +
-	'&maxRows=2&style=short';
+    console.log("fetching for ", placeWithoutSpaces);
+    return `${geonamesUrl}?placename=${place}&username=${user}` +
+        '&maxRows=2&style=short';
 };
+
+export async function getLocationCoordinates (ev) {
+    const location = document.getElementById('city').value;
+    fetch(coordQueryUrl(location, geonamesUser))
+        .then(res => res.json())
+        .then(res => {
+            console.log("Received data: ", res);
+            const place = res.postalCodes.shift();
+            const city = place.placeName;
+            const country = place.countryCode;
+            document.getElementById('upcoming-trip-location').innerHTML =
+                `${city}, ${country}`;
+        });
+}
 
 // Create a new date instance dynamically with JS
 const d = new Date();
