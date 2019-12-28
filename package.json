@@ -4,10 +4,12 @@
    "description": "Capstone Project Travel App for Udacity Frontend Nanodegree course.",
    "scripts": {
       "test": "echo 'No test specified' && exit 1",
-      "monitor": "nodemon src/server/server.js",
-      "build:dev": "webpack-dev-server --config webpack.dev.js --open",
-      "start:dev": "npm-run-all --parallel monitor build:dev",
-      "start": "node server.js"
+      "dev-server": "nodemon src/server/server.js",
+      "dev-build": "webpack-dev-server --config webpack.dev.js --open",
+      "prod-server": "node src/server/server.js",
+      "prod-build": "webpack --config webpack.prod.js",
+      "start-dev": "npm-run-all --parallel dev-*",
+      "start": "npm-run-all prod-build prod-server"
    },
    "keywords": [
       "udacity",
@@ -25,7 +27,8 @@
       "express": "^4.17.1",
       "os": "^0.1.1",
       "webpack": "^4.41.4",
-      "webpack-cli": "^3.3.10"
+      "webpack-cli": "^3.3.10",
+      "workbox-webpack-plugin": "^4.3.1"
    },
    "devDependencies": {
       "@babel/core": "^7.7.7",
@@ -38,8 +41,10 @@
       "eslint-loader": "^3.0.3",
       "fibers": "^4.0.2",
       "html-webpack-plugin": "^3.2.0",
+      "mini-css-extract-plugin": "^0.9.0",
       "nodemon": "^2.0.2",
       "npm-run-all": "^4.1.5",
+      "optimize-css-assets-webpack-plugin": "^5.0.3",
       "regenerator-runtime": "^0.13.3",
       "sass": "^1.24.0",
       "sass-loader": "^8.0.0",
