@@ -1,4 +1,5 @@
-import { submitHandler, getLocationCoordinates } from './js/app.js';
+import { getLocationCoordinates,
+         getDateInput } from './js/app.js';
 
 // Need this to get async/await working with babel translation
 import 'regenerator-runtime/runtime';
@@ -13,8 +14,12 @@ import './styles/style.scss';
 document.addEventListener('DOMContentLoaded', _ => {
     const submitButton = document.getElementById('submit');
     submitButton.addEventListener('click', Client.getLocationCoordinates);
+
+    const dateInput = document.getElementById('new-travel-date');
+    dateInput.addEventListener('input', Client.getDateInput);
 });
 
 export {
-    getLocationCoordinates
+    getLocationCoordinates,
+    getDateInput
 };

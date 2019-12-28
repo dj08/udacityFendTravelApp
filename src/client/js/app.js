@@ -1,5 +1,14 @@
 // Frontend javascript for Travel app
 
+// Top level JS object to hold latest trip details 
+const upcomingTripDetails = {
+    place: '',
+    country: '',
+    latitude: '',
+    longitude: '',
+    departure: ''
+};
+
 // Setup for GeoNames API. Rubric needs this info in the main app.js
 const geonamesUrl = 'http://api.geonames.org/postalCodeSearchJSON';
 const geonamesUser = 'deejay08';
@@ -23,6 +32,15 @@ export async function getLocationCoordinates (ev) {
             document.getElementById('upcoming-trip-location').innerHTML =
                 `${city}, ${country}`;
         });
+}
+
+export async function getDateInput (ev) {
+    upcomingTripDetails.departure =
+        new Date(document.getElementById('new-travel-date').value);
+    console.log('Entered date: ', upcomingTripDetails.departure);
+    const daysToGo =
+          Math.round((upcomingTripDetails.departure - new Date())/(1000*60*60*24));
+    document.getElementById('days-to-go').innerHTML = daysToGo; 
 }
 
 // Create a new date instance dynamically with JS
