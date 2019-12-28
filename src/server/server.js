@@ -1,4 +1,6 @@
-// Server side code for Weather Journal project.
+// Server side code for Travel App. It has a minimal function of
+// saving past user data. API handling is done through frontend code
+// as per rubric requirement.
 
 // My project constants
 // Backend port is noted as a global constant to share the setting
