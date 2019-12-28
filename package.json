@@ -4,11 +4,13 @@
    "description": "Capstone Project Travel App for Udacity Frontend Nanodegree course.",
    "scripts": {
       "test": "echo 'No test specified' && exit 1",
-      "dev-server": "nodemon src/server/server.js",
-      "dev-build": "webpack-dev-server --config webpack.dev.js --open",
+      "devel-server": "nodemon src/server/server.js",
+      "devel-build": "webpack-dev-server --config webpack.dev.js --open",
       "prod-server": "node src/server/server.js",
       "prod-build": "webpack --config webpack.prod.js",
-      "start-dev": "npm-run-all --parallel dev-*",
+      "start-dev": "npm-run-all --parallel devel-*",
+      "dev": "npm run devel-build",
+      "build": "npm run prod-build",
       "start": "npm-run-all prod-build prod-server"
    },
    "keywords": [
