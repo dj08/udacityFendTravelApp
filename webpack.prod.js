@@ -6,7 +6,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 // Service workers added in prod to allow offline access.
 const WorkboxPlugin = require('workbox-webpack-plugin');
 
-module.exports = {
+module.exports = merge(common, {
     mode: 'production',
     optimization: {
 	minimizer: [new TerserPlugin(), new OptimizeCssAssetsPlugin()]
@@ -27,4 +27,4 @@ module.exports = {
 	new MiniCssExtractPlugin({filename: '[name].css'}),
 	new WorkboxPlugin.GenerateSW(),
     ]
-}
+});
