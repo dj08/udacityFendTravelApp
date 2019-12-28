@@ -47,7 +47,7 @@ const uiUpdateHelper = (id, data) =>
 
 // Function to update UI after all else is done
 const updateUi = async () => {
-    const resp = await fetch('https://localhost:8081/getData');
+    const resp = await fetch('http://localhost:8081/getData');
     try {
         const savedData = await resp.json();
         uiUpdateHelper('date', savedData.date);
@@ -67,7 +67,7 @@ export default function submitHandler (ev) {
     
     getWeather(owmApiUrl, zip, owmApiKey)
         .then(data => {
-            postData('https://localhost:8081/saveData',
+            postData('http://localhost:8081/saveData',
                      {zip: zip, userFeelings: feelings,
                       temperature: data.main.temp, date: newDate})
         })
