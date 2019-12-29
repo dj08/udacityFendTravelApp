@@ -134,7 +134,7 @@ export async function saveTripAndQuery (ev) {
     }
 }
 
-export async function getWeatherForecast () {
+async function getPlaceDetails () {
     const data = {
         latitude: upcomingTripDetails.latitude,
         longitude: upcomingTripDetails.longitude,
@@ -152,14 +152,17 @@ export async function getWeatherForecast () {
               body: JSON.stringify(data)
           });
     try {
-        const weatherInfo = await apiResponse.json();
-        document.getElementById('weather').innerHTML = JSON.stringify(weatherInfo);
+        const placeInfo = await apiResponse.json();
+        document.getElementById('weather').innerHTML = `
+Forecast: ${placeInfo.summary}
+L: ${placeInfo.tempLow} F, H: ${placeInfo.tempHigh} F
+        `;
     } catch(err) {
         presentErr('Failed to get weather: ', err);
     }
 }
 
-export async function getLocationCoordinates () {
+async function getLocationCoordinates () {
     const location = document.getElementById('travel-to-city').value;
     fetch(coordQueryUrl(location, geonamesUser))
         .then(res => res.json())
@@ -177,7 +180,7 @@ export async function getLocationCoordinates () {
         })
         .then(res => {
             console.log(res);
-            getWeatherForecast()
+            getPlaceDetails();
         });
     return {
         lat: upcomingTripDetails.latitude,

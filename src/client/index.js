@@ -2,10 +2,8 @@
 // Client library (defined later by webpack), import CSS, etc. All
 // this can make eslint uncomfortable. Hence disabling.
 /* eslint-disable no-undef */
-import { getLocationCoordinates,
-         getDateInput,
-         activateDateField, activateSaveButton, saveTripAndQuery,
-         getWeatherForecast } from './js/app.js';
+import { activateDateField, activateSaveButton,
+         saveTripAndQuery } from './js/app.js';
 
 // Need this to get async/await working with babel translation
 import 'regenerator-runtime/runtime';
@@ -46,8 +44,5 @@ document.addEventListener('DOMContentLoaded', () => {
 /* eslint-enable no-undef */
 
 export {
-    getLocationCoordinates,
-    getDateInput,
-    activateDateField, activateSaveButton, saveTripAndQuery,
-    getWeatherForecast
+    activateDateField, activateSaveButton, saveTripAndQuery
 };
