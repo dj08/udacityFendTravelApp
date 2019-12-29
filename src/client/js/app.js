@@ -40,7 +40,7 @@ export async function getWeatherForecast () {
         latitude: upcomingTripDetails.latitude,
         longitude: upcomingTripDetails.longitude,
         date: upcomingTripDetails.departure,
-	placeName: upcomingTripDetails.place
+        placeName: upcomingTripDetails.place
     };
     console.log("Passed data to weather app is: ", data);
     const apiResponse =
@@ -63,7 +63,6 @@ export async function getWeatherForecast () {
 export async function getLocationCoordinates (ev) {
     ev.preventDefault();
     const location = document.getElementById('city').value;
-    upcomingTripDetails.place = location;
     fetch(coordQueryUrl(location, geonamesUser))
         .then(res => res.json())
         .then(res => {
@@ -73,6 +72,8 @@ export async function getLocationCoordinates (ev) {
             const country = place.countryCode;
             upcomingTripDetails.latitude = place.lat;
             upcomingTripDetails.longitude = place.lng;
+            upcomingTripDetails.place = city;
+            upcomingTripDetails.country = country;
             document.getElementById('upcoming-trip-location').innerHTML =
                 `${city}, ${country}`;
         })

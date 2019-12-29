@@ -32,7 +32,7 @@ const weatherQueryUrl = (lat, lgt, tdate) => {
 const pixabayUrl = 'https://pixabay.com/api/?category=places&key=';
 const pixabayKey = process.env.PIXABAY_KEY;
 const pixabayQueryUrl = term =>
-      `${pixabayUrl}${pixabayKey}&q=${term}&image_type=photo`;
+      `${pixabayUrl}${pixabayKey}&q=${encodeURIComponent(term)}&image_type=photo`;
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -55,7 +55,12 @@ app.post('/getWeather', (req, res) => {
 
     // JS object to hold API query results. Eventually to be sent to
     // frontend code.
-    const locationDetails = {};
+    let locationDetails = {
+	summary: '',
+	tempHigh: '',
+	tempLow: '',
+	imageUrl: ''
+    };
     
     console.log('Querying for: ', latitude, longitude, date);
     console.log(weatherQueryUrl(latitude, longitude, date));
@@ -74,12 +79,14 @@ app.post('/getWeather', (req, res) => {
 	    const weather = JSON.parse(body).daily.data[0];
 
 	    console.log("Weather data: ", weather);
-	    const locationDetails.summary = weather.summary;
-	    const locationDetails.tempHigh = weather.temperatureHigh;
-	    const tempLow = weather.temperatureLow;
+	    locationDetails.summary = weather.summary;
+	    locationDetails.tempHigh = weather.temperatureHigh;
+	    locationDetails.tempLow = weather.temperatureLow;
 	});
-
+    // TODO: Need some chaining here. locationDetails does not resolve
+    // otherwise to the expected value. Returns blanks instead.
     // Pixabay Query
+    console.log("pixabay url: ", pixabayQueryUrl(placeName))
     request(
 	{ url: pixabayQueryUrl(placeName) },
 	(err, {body}) => {
@@ -89,8 +96,11 @@ app.post('/getWeather', (req, res) => {
 		});
 	    }
 	    console.log(JSON.parse(body));
+	    locationDetails.imageUrl = JSON.parse(body).hits[0].previewURL;
 	}
-    )
+    );
+    
+    console.log(locationDetails);
     res.send(locationDetails);
 });
 
