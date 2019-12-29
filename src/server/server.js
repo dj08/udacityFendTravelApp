@@ -16,7 +16,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const os = require('os');
-const request = require('request');
+const fetch = require('node-fetch');
 
 // TODO: Enable error checking for dotenv config here
 
@@ -46,7 +46,7 @@ const server = app.listen(servePort, _ => {
     console.log(`Running on ${os.hostname().toLowerCase()}.local:${servePort}`);
 });
 
-app.post('/getWeather', (req, res) => {
+app.post('/getWeather', async (req, res) => {
     const latitude = req.body.latitude;
     const longitude = req.body.longitude;
     const placeName = req.body.placeName;
@@ -66,42 +66,34 @@ app.post('/getWeather', (req, res) => {
     console.log(weatherQueryUrl(latitude, longitude, date));
 
     // Dark Sky query
-    request(
-	{ url: weatherQueryUrl(latitude, longitude, date) },
-	(err, {body}) => {
-	    if (err) {
-		return res.status(500).json({
-		    type: 'error', message: err.error
-		});
-	    }
-	    console.log(JSON.parse(body));
+    const weatherResponse =
+	  await fetch(weatherQueryUrl(latitude, longitude, date))
+	  .then(res => res.json())
+	  .catch(err => {
+	      console.log('Error in getting weather Data: ', err);
+	  });
 
-	    const weather = JSON.parse(body).daily.data[0];
-
-	    console.log("Weather data: ", weather);
-	    locationDetails.summary = weather.summary;
-	    locationDetails.tempHigh = weather.temperatureHigh;
-	    locationDetails.tempLow = weather.temperatureLow;
-	});
-    // TODO: Need some chaining here. locationDetails does not resolve
-    // otherwise to the expected value. Returns blanks instead.
+    const weatherData = weatherResponse.daily.data[0];
+    console.log("Weather data: ", weatherData);
+    
     // Pixabay Query
     console.log("pixabay url: ", pixabayQueryUrl(placeName))
-    request(
-	{ url: pixabayQueryUrl(placeName) },
-	(err, {body}) => {
-	    if (err) {
-		return res.status(500).json({
-		    type: 'error', message: err.error
-		});
-	    }
-	    console.log(JSON.parse(body));
-	    locationDetails.imageUrl = JSON.parse(body).hits[0].previewURL;
-	}
-    );
-    
-    console.log(locationDetails);
-    res.send(locationDetails);
+    const pixabayResponse =
+	  await fetch(pixabayQueryUrl(placeName))
+	  .then(res => res.json())
+	  .catch(err => {
+	      console.log('Error in getting location image: ', err);
+	  });
+
+    console.log('Pixabay Response: ', pixabayResponse);
+    const imageUrl = pixabayResponse.hits[0].previewURL;
+
+    res.send({
+	summary: weatherData.summary,
+	tempHigh: weatherData.temperatureHigh,
+	tempLow: weatherData.temperatureLow,
+	image: imageUrl
+    });
 });
 
 
