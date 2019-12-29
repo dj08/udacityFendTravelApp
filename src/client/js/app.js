@@ -30,13 +30,17 @@ const coordQueryUrl = (place, user) => {
 /* eslint-disable */
 const darkSkyUrl = 'http://api.darksky.net/forecast/';
 const darkSkyKey = 'bfa91238e8d40ed514ccc04024cdab19';
+
+const pixabayUrl = 'https://pixabay.com/api/?category=places&key=';
+const pixabayKey = '14764674-6073320ee678de9704f2a472c';
 /* eslint-enable */
 
 export async function getWeatherForecast () {
     const data = {
         latitude: upcomingTripDetails.latitude,
         longitude: upcomingTripDetails.longitude,
-        date: upcomingTripDetails.departure
+        date: upcomingTripDetails.departure,
+	placeName: upcomingTripDetails.place
     };
     console.log("Passed data to weather app is: ", data);
     const apiResponse =
@@ -59,6 +63,7 @@ export async function getWeatherForecast () {
 export async function getLocationCoordinates (ev) {
     ev.preventDefault();
     const location = document.getElementById('city').value;
+    upcomingTripDetails.place = location;
     fetch(coordQueryUrl(location, geonamesUser))
         .then(res => res.json())
         .then(res => {

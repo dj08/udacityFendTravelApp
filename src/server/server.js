@@ -28,6 +28,12 @@ const weatherQueryUrl = (lat, lgt, tdate) => {
 	'?exclude=currently,hourly,minutely,flags';
 };
 
+// Pixbay API setup
+const pixabayUrl = 'https://pixabay.com/api/?category=places&key=';
+const pixabayKey = process.env.PIXABAY_KEY;
+const pixabayQueryUrl = term =>
+      `${pixabayUrl}${pixabayKey}&q=${term}&image_type=photo`;
+
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -43,12 +49,20 @@ const server = app.listen(servePort, _ => {
 app.post('/getWeather', (req, res) => {
     const latitude = req.body.latitude;
     const longitude = req.body.longitude;
+    const placeName = req.body.placeName;
     // JS returns date in ms, but dark sky needs it in seconds.
     const date = req.body.date/1000;
+
+    // JS object to hold API query results. Eventually to be sent to
+    // frontend code.
+    const locationDetails = {};
+    
     console.log('Querying for: ', latitude, longitude, date);
     console.log(weatherQueryUrl(latitude, longitude, date));
+
+    // Dark Sky query
     request(
-	{url: weatherQueryUrl(latitude, longitude, date) },
+	{ url: weatherQueryUrl(latitude, longitude, date) },
 	(err, {body}) => {
 	    if (err) {
 		return res.status(500).json({
@@ -60,13 +74,26 @@ app.post('/getWeather', (req, res) => {
 	    const weather = JSON.parse(body).daily.data[0];
 
 	    console.log("Weather data: ", weather);
-	    res.send({
-		summary: weather.summary,
-		tempHigh: weather.temperatureHigh,
-		tempLow: weather.temperatureLow
-	    });
+	    const locationDetails.summary = weather.summary;
+	    const locationDetails.tempHigh = weather.temperatureHigh;
+	    const tempLow = weather.temperatureLow;
 	});
+
+    // Pixabay Query
+    request(
+	{ url: pixabayQueryUrl(placeName) },
+	(err, {body}) => {
+	    if (err) {
+		return res.status(500).json({
+		    type: 'error', message: err.error
+		});
+	    }
+	    console.log(JSON.parse(body));
+	}
+    )
+    res.send(locationDetails);
 });
+
 
 app.get('/getData', (req, res) => {
     console.log(`Sending data: `, projectData);
