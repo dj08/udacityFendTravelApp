@@ -33,7 +33,7 @@ module.exports = merge(common, {
                 options: {}
             },
             {
-                test: /\.scss$/,
+                test: /\.s[ac]ss$/,
                 use: [ 'style-loader', 'css-loader', 'sass-loader' ]
             }
         ]

@@ -18,7 +18,7 @@ module.exports = merge(common, {
 		// style-loader here. This enables putting the styles
 		// as a stylesheet in the HTML, as opposed to styles
 		// done via JS in case of style-loader.
-		test: /\.scss$/,
+		test: /\.s[ac]ss$/,
 		use: [ MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader' ]
 	    }
 	]
