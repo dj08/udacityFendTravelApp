@@ -71,7 +71,16 @@ export function saveTripAndQuery (ev) {
     // values
     let success = validateInputForms(); 
     // Start API queries here
-
+    /* Things to do:
+       - New card appears to show travel details
+       - Coordinates query API fires off. It is slowest.
+       - Image search shows loading sign.
+       - Image fetcher API fires and updates image.
+       - Weather div updates to show that it is fetching weather
+       - Weather API fires off after coordinates are available.
+       - Save Trip API fires off to save trip to backend.
+    */
+    
     // Depending on the API responses, set tool tip messages
     if (success) {
         updateEntryHelp('Trip Saved. Please enter next destination.')

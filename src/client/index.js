@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
        3. User enters the date. Reactions:
           - 'Save Trip' button is now active. Possibly some animation.
        4. User clicks the 'Save Trip' button. Reaction:
+          - New card appears to show details
           - Coordinates query API fires off. It is slowest.
           - Image search shows loading sign.
           - Image fetcher API fires and updates image.
