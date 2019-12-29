@@ -18,25 +18,26 @@ import './styles/style.scss';
 // handles js insertion in our HTML view.
 document.addEventListener('DOMContentLoaded', () => {
     /* Here is how the app is expected to work:
-       1. At start: only city field is active. Date field is visibly inactive.
-       2. User enters the city. Reaction: 
-          - Weather div gets populated with request for dep date.
-          - Date field is now available.
-       3. User enters the date. Reaction:
+       1. At start: only city & date fields are active.
+          - 'Save Trip' button is inactive
+       2. User enters the city.
+       3. User enters the date. Reactions:
+          - 'Save Trip' button is now active. Possibly some animation.
+       4. User clicks the 'Save Trip' button. Reaction:
           - Coordinates query API fires off. It is slowest.
           - Image search shows loading sign.
 	  - Image fetcher API fires and updates image.
           - Weather div updates to show that it is fetching weather
-	  - Weather API fires off after ensuring that coordinates are
-       available.
-       4. All data is reset when city changes
+	  - Weather API fires off after coordinates are available.
+	  - Save Trip API fires off to save trip to backend.
+       4. All frontend data is reset when city changes.
     */
-    const cityField = document.getElementById('city');
+    const cityField = document.getElementById('travel-to-city');
     const dateField = document.getElementById('new-travel-date');
+    const saveTripButton = document.getElementById('save-trip-button');
     
-    submitButton.addEventListener('click', Client.getLocationCoordinates);
+    saveTripButton.addEventListener('click', Client.getLocationCoordinates);
 
-    const dateInput = 
     dateInput.addEventListener('input', Client.getDateInput);
 });
 /* eslint-enable */
