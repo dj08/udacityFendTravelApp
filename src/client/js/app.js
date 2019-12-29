@@ -59,7 +59,7 @@ const validateInputForms = () => {
           && (document.getElementById('new-travel-date').value != '')
     if (!valid) {
         alert('Please enter valid Travel Destination and Dates!');
-	return false;
+        return false;
     } else { return true; }
 }
 
@@ -85,6 +85,10 @@ function createUiNewTravelCard () {
     tripWeather.id = 'weather';
     tripWeather.innerHTML = 'Fetching Weather at Destination...';
 
+    const placeImg = document.createElement('img');
+    placeImg.id = 'place-img';
+
+    tripCard.appendChild(placeImg);
     tripCard.appendChild(tripLocation);
     tripCard.appendChild(tripDays);
     tripCard.appendChild(tripWeather);
@@ -94,13 +98,13 @@ function createUiNewTravelCard () {
     tripDetailsDivHolder.appendChild(tripCard);
     /*
     const travelCardTemplate = `
-    	<div class="holder upcoming-trip-details">
-	<h2>My trip to: <div id="upcoming-trip-location"></div></h2>
-	<h2>Days To Go: <div id="days-to-go"></div></h2>
-	<h3>Weather: <div id="weather"></div></h3>
-	</div>`;
+        <div class="holder upcoming-trip-details">
+        <h2>My trip to: <div id="upcoming-trip-location"></div></h2>
+        <h2>Days To Go: <div id="days-to-go"></div></h2>
+        <h3>Weather: <div id="weather"></div></h3>
+        </div>`;
     document.getElementById('upcoming-trip').innerHTML =
-	travelCardTemplate;
+        travelCardTemplate;
     */
 }
 
@@ -156,8 +160,10 @@ async function getPlaceDetails () {
 Forecast: ${placeInfo.summary}
 L: ${placeInfo.tempLow} F, H: ${placeInfo.tempHigh} F
         `;
+	document.getElementById('place-img').src =
+	    placeInfo.image;
     } catch(err) {
-        presentErr('Failed to get weather: ', err);
+        presentErr('Failed to location details: ', err);
     }
 }
 
@@ -194,6 +200,6 @@ function getRemainingDays () {
     const daysToGo =
           Math.round((upcomingTripDetails.departure - new Date())/(1000*60*60*24));
     document.getElementById('days-to-go').innerHTML =
-	`${daysToGo} days to go!`; 
+        `${daysToGo} days to go!`; 
 }
 
