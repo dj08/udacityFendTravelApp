@@ -11,7 +11,9 @@ const upcomingTripDetails = {
 
 const presentErr = console.log; // Error presentation function
 
-// Setup for GeoNames API. Rubric needs this info in the main app.js
+// Setup for GeoNames API. Rubric needs this info in the main app.js:
+// "app.js: There should be URLS and API Keys for at least 3 APIs, including
+// Geonames, Dark Sky, and Pixabay."
 const geonamesUrl = 'http://api.geonames.org/postalCodeSearchJSON';
 const geonamesUser = 'deejay08';
 const coordQueryUrl = (place, user) => {
@@ -35,32 +37,6 @@ const pixabayUrl = 'https://pixabay.com/api/?category=places&key=';
 const pixabayKey = '14764674-6073320ee678de9704f2a472c';
 /* eslint-enable */
 
-// Function to query image after weather details are available.
-export async function getLocationImage() {
-    const data = {
-        latitude: upcomingTripDetails.latitude,
-        longitude: upcomingTripDetails.longitude,
-        date: upcomingTripDetails.departure,
-        placeName: upcomingTripDetails.place
-    };
-    console.log("Passed data to weather app is: ", data);
-    const apiResponse =
-          await fetch('/getWeather', {
-              method: 'POST',
-              credentials: 'same-origin',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(data)
-          });
-    try {
-        const weatherInfo = await apiResponse.json();
-        document.getElementById('weather').innerHTML = JSON.stringify(weatherInfo);
-    } catch(err) {
-        presentErr('Failed to get weather: ', err);
-    }    
-}
-
 export async function getWeatherForecast () {
     const data = {
         latitude: upcomingTripDetails.latitude,
@@ -70,7 +46,7 @@ export async function getWeatherForecast () {
     };
     console.log("Passed data to weather app is: ", data);
     const apiResponse =
-          await fetch('/getWeather', {
+          await fetch('/getPlaceDetails', {
               method: 'POST',
               credentials: 'same-origin',
               headers: {

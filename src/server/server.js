@@ -47,7 +47,7 @@ const server = app.listen(servePort, _ => {
     console.log(`Server started on ${os.hostname().toLowerCase()}.local:${servePort}`);
 });
 
-app.post('/getWeather', async (req, res) => {
+app.post('/getPlaceDetails', async (req, res) => {
     const weatherData =
           await darkSky.queryWeather(req.body, darkSkyKey);
 
