@@ -5,7 +5,8 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 // Port settings are stored in this file. They are shared with the
 // express server this way.
 const constants = require('./CONSTANTS');
-const backendServer = `http://localhost:${constants.BACKEND_PORT}/`
+const backendServer = `http://localhost:${constants.BACKEND_PORT}/`;
+
 module.exports = merge(common, {
     mode: 'development',
     devtool: 'source-map',
