@@ -22,11 +22,11 @@ const coordQueryUrl = (place, user) => {
         '&maxRows=2&style=short';
 };
 
-// Setup for Dark Sky API. The API communication actually happens
-// through the backend. The following are here just to meet rubric
-// requirements of these vars being defined in frontend app.js. The
-// API communication cannot happen through frontend app.js owing to
-// cross-origin restrictions in the dark sky API.
+// Setup for Dark Sky & Pixabay APIs. The API communication actually
+// happens through the backend. The following are here just to meet
+// rubric requirements of these vars being defined in frontend
+// app.js. The API communication cannot happen through frontend app.js
+// owing to cross-origin restrictions in the dark sky API.
 /* eslint-disable */
 const darkSkyUrl = 'http://api.darksky.net/forecast/';
 const darkSkyKey = 'bfa91238e8d40ed514ccc04024cdab19';
@@ -44,7 +44,7 @@ export async function getWeatherForecast () {
     };
     console.log("Passed data to weather app is: ", data);
     const apiResponse =
-          await fetch('http://localhost:3000/getWeather', {
+          await fetch('/getWeather', {
               method: 'POST',
               credentials: 'same-origin',
               headers: {
