@@ -14,9 +14,6 @@ const queryWeather = async (request, darkSkyKey) => {
     // JS returns date in ms, but dark sky needs it in seconds.
     const date = request.date/1000;
 
-    console.log('Querying for: ', latitude, longitude, date);
-    console.log(weatherQueryUrl(latitude, longitude, date, darkSkyKey));
-
     // Dark Sky query
     const weatherResponse =
 	  await fetch(weatherQueryUrl(

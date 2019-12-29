@@ -44,13 +44,12 @@ app.use(cors());
 app.use(express.static('./dist'));
 
 const server = app.listen(servePort, _ => {
-    console.log(`Running on ${os.hostname().toLowerCase()}.local:${servePort}`);
+    console.log(`Server started on ${os.hostname().toLowerCase()}.local:${servePort}`);
 });
 
 app.post('/getWeather', async (req, res) => {
     const weatherData =
           await darkSky.queryWeather(req.body, darkSkyKey);
-    console.log("Weather data: ", weatherData);
 
     const imageUrl =
           await pixabay.getImage(req.body.placeName, pixabayKey);
