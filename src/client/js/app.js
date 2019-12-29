@@ -37,6 +37,27 @@ const pixabayUrl = 'https://pixabay.com/api/?category=places&key=';
 const pixabayKey = '14764674-6073320ee678de9704f2a472c';
 /* eslint-enable */
 
+// Helper function to handle initial form input interaction
+const updateEntryHelp = text =>
+    document.getElementById('whats-happening').innerHTML = text;
+
+export function activateDateField (ev) {
+    ev.preventDefault();
+    document.getElementById('new-travel-date').disabled = false;
+    updateEntryHelp('Great! Please enter your travel date...');
+}
+
+export function activateSaveButton (ev) {
+    ev.preventDefault();
+    document.getElementById('save-trip-button').disabled = false;
+    updateEntryHelp('Awesome! Please click Save Trip button to confirm!');
+}
+
+export function saveTripAndQuery (ev) {
+    ev.preventDefault();
+    updateEntryHelp('Thanks! Saving Trip...');
+}
+
 export async function getWeatherForecast () {
     const data = {
         latitude: upcomingTripDetails.latitude,
