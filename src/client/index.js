@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
           - Image fetcher API fires and updates image.
           - Weather div updates to show that it is fetching weather
           - Weather API fires off after coordinates are available.
-          - Save Trip API fires off to save trip to backend.
        4. All frontend data is reset when city changes.
     */
     const cityField = document.getElementById('travel-to-city');

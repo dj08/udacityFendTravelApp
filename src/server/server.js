@@ -61,13 +61,3 @@ app.post('/getPlaceDetails', async (req, res) => {
         image: imageUrl
     });
 });
-
-app.get('/getData', (req, res) => {
-    console.log(`Sending data: `, projectData);
-    res.send(projectData);
-});
-
-app.post('/saveData', (req, res) => {
-    projectData = req.body;
-    console.log(`Saved data: `, projectData);
-});

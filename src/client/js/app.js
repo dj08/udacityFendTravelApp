@@ -119,7 +119,6 @@ export async function saveTripAndQuery (ev) {
        - Image fetcher API fires and updates image.
        - Weather div updates to show that it is fetching weather
        - Weather API fires off after coordinates are available.
-       - Save Trip API fires off to save trip to backend.
     */
     createUiNewTravelCard();
     getRemainingDays();
