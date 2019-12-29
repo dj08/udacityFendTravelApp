@@ -53,9 +53,31 @@ export function activateSaveButton (ev) {
     updateEntryHelp('Awesome! Please click Save Trip button to confirm!');
 }
 
+// Helper function to validate that city and date fields are not funky
+const validateInputForms = () => {
+    const valid = (document.getElementById('travel-to-city').value != '')
+          && (document.getElementById('new-travel-date').value != '')
+    if (!valid) {
+        alert('Please enter valid Travel Destination and Dates!');
+	return false;
+    } else { return true; }
+}
+
 export function saveTripAndQuery (ev) {
     ev.preventDefault();
     updateEntryHelp('Thanks! Saving Trip...');
+
+    // At this point, both city and date functions should have valid
+    // values
+    let success = validateInputForms(); 
+    // Start API queries here
+
+    // Depending on the API responses, set tool tip messages
+    if (success) {
+        updateEntryHelp('Trip Saved. Please enter next destination.')
+    } else {
+        updateEntryHelp('Sorry -- something went wrong. Please try again.')
+    }
 }
 
 export async function getWeatherForecast () {
