@@ -23,7 +23,7 @@ const fetch = require('node-fetch');
 if (!(('DARK_SKY_KEY' in process.env) &&
       ('PIXABAY_KEY' in process.env))) {
     throw "ERROR: Could not find API Keys." +
-	' Is the .env file correctly placed?'
+        ' Is the .env file correctly placed?'
 }
 
 // Dark Sky API setup -- this code actually does the hard work
@@ -49,17 +49,17 @@ const server = app.listen(servePort, _ => {
 
 app.post('/getWeather', async (req, res) => {
     const weatherData =
-	  await darkSky.queryWeather(req.body, darkSkyKey);
+          await darkSky.queryWeather(req.body, darkSkyKey);
     console.log("Weather data: ", weatherData);
 
     const imageUrl =
-	  await pixabay.getImage(req.body.placeName, pixabayKey);
+          await pixabay.getImage(req.body.placeName, pixabayKey);
 
     res.send({
-	summary: weatherData.summary,
-	tempHigh: weatherData.temperatureHigh,
-	tempLow: weatherData.temperatureLow,
-	image: imageUrl
+        summary: weatherData.summary,
+        tempHigh: weatherData.temperatureHigh,
+        tempLow: weatherData.temperatureLow,
+        image: imageUrl
     });
 });
 
