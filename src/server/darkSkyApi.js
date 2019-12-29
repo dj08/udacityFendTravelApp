@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 // Functions to handle Dark Sky API requests
 const fetch = require('node-fetch');
 
@@ -26,4 +27,4 @@ const queryWeather = async (request, darkSkyKey) => {
     return weatherResponse.daily.data[0];
 };
 
-module.exports = { queryWeather };
+module.exports = { queryWeather, weatherQueryUrl, darkSkyUrl };

@@ -193,12 +193,14 @@ async function getLocationCoordinates () {
     }
 }
 
+export const calcDays = date =>
+      Math.round((date - new Date())/(1000*60*60*24));
+
 function getRemainingDays () {
     upcomingTripDetails.departure =
         document.getElementById('new-travel-date').valueAsNumber;
     console.log('Entered date: ', upcomingTripDetails.departure);
-    const daysToGo =
-          Math.round((upcomingTripDetails.departure - new Date())/(1000*60*60*24));
+    daysToGo = calcDays(upcomingTripDetails.departure);
     document.getElementById('days-to-go').innerHTML =
         `${daysToGo} days to go!`; 
 }
