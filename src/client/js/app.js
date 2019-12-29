@@ -63,7 +63,48 @@ const validateInputForms = () => {
     } else { return true; }
 }
 
-export function saveTripAndQuery (ev) {
+// This function creates the travel card for the latest input
+function createUiNewTravelCard () {
+    const tripDetailsDiv = document.createElement('div');
+    tripDetailsDiv.class = 'upcoming-trip-details';
+
+    // Insert new card here
+    const tripDetailsDivHolder = document.getElementById('upcoming-trip-holder');
+    
+    const tripCard = document.createElement('div');
+    // tripCard.id = 'upcoming-trip-details';
+
+    const tripLocation = document.createElement('h2');
+    tripLocation.id = 'upcoming-trip-location';
+    tripLocation.innerHTML = 'Fetching Destination Coordinates...';
+
+    const tripDays = document.createElement('h2');
+    tripDays.id = 'days-to-go';
+
+    const tripWeather = document.createElement('h3');
+    tripWeather.id = 'weather';
+    tripWeather.innerHTML = 'Fetching Weather at Destination...';
+
+    tripCard.appendChild(tripLocation);
+    tripCard.appendChild(tripDays);
+    tripCard.appendChild(tripWeather);
+
+    // Refresh div before inserting HTML
+    tripDetailsDivHolder.innerHTML = '';
+    tripDetailsDivHolder.appendChild(tripCard);
+    /*
+    const travelCardTemplate = `
+    	<div class="holder upcoming-trip-details">
+	<h2>My trip to: <div id="upcoming-trip-location"></div></h2>
+	<h2>Days To Go: <div id="days-to-go"></div></h2>
+	<h3>Weather: <div id="weather"></div></h3>
+	</div>`;
+    document.getElementById('upcoming-trip').innerHTML =
+	travelCardTemplate;
+    */
+}
+
+export async function saveTripAndQuery (ev) {
     ev.preventDefault();
     updateEntryHelp('Thanks! Saving Trip...');
 
@@ -80,6 +121,10 @@ export function saveTripAndQuery (ev) {
        - Weather API fires off after coordinates are available.
        - Save Trip API fires off to save trip to backend.
     */
+    createUiNewTravelCard();
+    getRemainingDays();
+    // The following calls the rest of the APIs in chain
+    getLocationCoordinates();
     
     // Depending on the API responses, set tool tip messages
     if (success) {
@@ -114,9 +159,8 @@ export async function getWeatherForecast () {
     }
 }
 
-export async function getLocationCoordinates (ev) {
-    ev.preventDefault();
-    const location = document.getElementById('city').value;
+export async function getLocationCoordinates () {
+    const location = document.getElementById('travel-to-city').value;
     fetch(coordQueryUrl(location, geonamesUser))
         .then(res => res.json())
         .then(res => {
@@ -141,13 +185,13 @@ export async function getLocationCoordinates (ev) {
     }
 }
 
-export async function getDateInput (ev) {
-    ev.preventDefault();
+function getRemainingDays () {
     upcomingTripDetails.departure =
         document.getElementById('new-travel-date').valueAsNumber;
     console.log('Entered date: ', upcomingTripDetails.departure);
     const daysToGo =
           Math.round((upcomingTripDetails.departure - new Date())/(1000*60*60*24));
-    document.getElementById('days-to-go').innerHTML = daysToGo; 
+    document.getElementById('days-to-go').innerHTML =
+	`${daysToGo} days to go!`; 
 }
 
