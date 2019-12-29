@@ -3,7 +3,7 @@
    "version": "1.0.0",
    "description": "Capstone Project Travel App for Udacity Frontend Nanodegree course.",
    "scripts": {
-      "test": "echo 'No test specified' && exit 1",
+      "test": "jest",
       "devel-server": "nodemon src/server/server.js",
       "devel-build": "webpack-dev-server --config webpack.dev.js --open firefox",
       "prod-server": "node src/server/server.js",
@@ -37,6 +37,7 @@
    },
    "devDependencies": {
       "@babel/core": "^7.7.7",
+      "@babel/plugin-transform-runtime": "^7.7.6",
       "@babel/preset-env": "^7.7.7",
       "babel-loader": "^8.0.6",
       "babel-polyfill": "^6.26.0",
