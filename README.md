@@ -49,7 +49,10 @@ The app implements the full rubric. It uses:
 
 ## Beyond Udacity's Basic Rubric
 The code implements the following items beyond Udacity's basic rubric:
-- Implements [REST Countries API](https://restcountries.eu/) in `app.js`. 
+- Implements [REST Countries API](https://restcountries.eu/) in
+  `app.js`.
+- Implements `localStorage` functionality in `app.js` to retain entry
+  between browser sessions.
 - The entire code is follows `eslint:recommended` style. The linter
   is integrated into development webpack config (`webpack.dev.js`).
 - Implement `webpack-merge` to keep webpack configurations DRY.

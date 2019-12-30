@@ -3,7 +3,7 @@
 // this can make eslint uncomfortable. Hence disabling.
 /* eslint-disable no-undef */
 import { activateDateField, activateSaveButton,
-         saveTripAndQuery } from './js/app.js';
+         saveTripAndQuery, getFromLocalStorage } from './js/app.js';
 
 // Need this to get async/await working with babel translation
 import 'regenerator-runtime/runtime';
@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
           - Weather API fires off after coordinates are available.
        4. All frontend data is reset when city changes.
     */
+    Client.getFromLocalStorage();
     const cityField = document.getElementById('travel-to-city');
     const dateField = document.getElementById('new-travel-date');
     const saveTripButton = document.getElementById('save-trip-button');
@@ -43,5 +44,5 @@ document.addEventListener('DOMContentLoaded', () => {
 /* eslint-enable no-undef */
 
 export {
-    activateDateField, activateSaveButton, saveTripAndQuery
+    activateDateField, activateSaveButton, saveTripAndQuery, getFromLocalStorage
 };

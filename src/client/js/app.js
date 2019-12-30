@@ -101,6 +101,27 @@ function createUiNewTravelCard () {
     tripDetailsDivHolder.appendChild(tripCard);
 }
 
+export const saveToLocalStorage = () => {
+    localStorage.setItem('travelAppHistory', JSON.stringify({
+        place: document.getElementById('travel-to-city').value,
+        departure: document.getElementById('new-travel-date').value
+    }));
+}
+
+export const getFromLocalStorage = () => {
+    const history = localStorage.getItem('travelAppHistory');
+    if (history) {
+        const data = JSON.parse(history) ||
+              { place: '', departure: '' };
+        document.getElementById('new-travel-date').value =
+            data.departure;
+        document.getElementById('travel-to-city').value =
+            data.place;
+	document.getElementById('save-trip-button').disabled = false;
+	document.getElementById('new-travel-date').disabled = false;
+    }
+}
+
 export async function saveTripAndQuery (ev) {
     ev.preventDefault();
     updateEntryHelp('Thanks! Saving Trip...');
@@ -117,6 +138,7 @@ export async function saveTripAndQuery (ev) {
        - Weather div updates to show that it is fetching weather
        - Weather API fires off after coordinates are available.
     */
+    saveToLocalStorage();
     createUiNewTravelCard();
     getRemainingDays();
     // The following calls the rest of the APIs in chain
