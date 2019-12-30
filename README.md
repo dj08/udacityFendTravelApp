@@ -35,7 +35,7 @@ PIXABAY_KEY=***-***-****
 6. Enter the date you want to visit on.
 7. Click 'Save Trip' button. It will show up the weather forecast and
 a small image related to the destination. 
-
+xn
 ## Implementation Details
 The app implements the full rubric. It uses:
 1. Basic `express` server as a proxy for API requests.
@@ -49,12 +49,13 @@ The app implements the full rubric. It uses:
 
 ## Beyond Udacity's Basic Rubric
 The code implements the following items beyond Udacity's basic rubric:
-1. The entire code is follows `eslint:recommended` style. The linter
-   is integrated into development webpack config (`webpack.dev.js`).
-2. Implement `webpack-merge` to keep webpack configurations DRY.
-3. `webpack-dev-server` is installed with proxy requests to `express
-   js node` server. This helps by not having to hardcode full endpoint
-   URLs in the frontend `fetch` requests. So,
-   `fetch(http://localhost:3000/endPoint)` can simply be replaced with
-   `fetch(/endPoint)`. This helps with more sustainable code. 
+- Implements [REST Countries API](https://restcountries.eu/) in `app.js`. 
+- The entire code is follows `eslint:recommended` style. The linter
+  is integrated into development webpack config (`webpack.dev.js`).
+- Implement `webpack-merge` to keep webpack configurations DRY.
+- `webpack-dev-server` is installed with proxy requests to `express
+  js node` server. This helps by not having to hardcode full endpoint
+  URLs in the frontend `fetch` requests. So,
+  `fetch(http://localhost:3000/endPoint)` can simply be replaced with
+  `fetch(/endPoint)`. This helps with more sustainable code. 
 
