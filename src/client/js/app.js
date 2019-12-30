@@ -18,9 +18,7 @@ const geonamesUrl = 'http://api.geonames.org/postalCodeSearchJSON';
 const geonamesUser = 'deejay08';
 const coordQueryUrl = (place, user) => {
     // Need to handle input like 'City, State' as well as 'City State'
-    const placeWithoutSpaces = place.replace(/\s+/g, ',');
-    console.log("fetching for ", placeWithoutSpaces);
-    return `${geonamesUrl}?placename=${place}&username=${user}` +
+    return `${geonamesUrl}?placename=${encodeURIComponent(place)}&username=${user}` +
         '&maxRows=2&style=short';
 };
 
@@ -96,16 +94,6 @@ function createUiNewTravelCard () {
     // Refresh div before inserting HTML
     tripDetailsDivHolder.innerHTML = '';
     tripDetailsDivHolder.appendChild(tripCard);
-    /*
-    const travelCardTemplate = `
-        <div class="holder upcoming-trip-details">
-        <h2>My trip to: <div id="upcoming-trip-location"></div></h2>
-        <h2>Days To Go: <div id="days-to-go"></div></h2>
-        <h3>Weather: <div id="weather"></div></h3>
-        </div>`;
-    document.getElementById('upcoming-trip').innerHTML =
-        travelCardTemplate;
-    */
 }
 
 export async function saveTripAndQuery (ev) {
@@ -137,14 +125,13 @@ export async function saveTripAndQuery (ev) {
     }
 }
 
-async function getPlaceDetails () {
+async function getPlaceDetails (res) {
     const data = {
-        latitude: upcomingTripDetails.latitude,
-        longitude: upcomingTripDetails.longitude,
+        latitude: res.lat,
+        longitude: res.lng,
         date: upcomingTripDetails.departure,
-        placeName: upcomingTripDetails.place
+        placeName: res.place
     };
-    console.log("Passed data to weather app is: ", data);
     const apiResponse =
           await fetch('/getPlaceDetails', {
               method: 'POST',
@@ -172,7 +159,6 @@ async function getLocationCoordinates () {
     fetch(coordQueryUrl(location, geonamesUser))
         .then(res => res.json())
         .then(res => {
-            console.log("Received data: ", res);
             const place = res.postalCodes.shift();
             const city = place.placeName;
             const country = place.countryCode;
@@ -182,11 +168,9 @@ async function getLocationCoordinates () {
             upcomingTripDetails.country = country;
             document.getElementById('upcoming-trip-location').innerHTML =
                 `${city}, ${country}`;
+            return {lat: place.lat, lng: place.lng, place: city};
         })
-        .then(res => {
-            console.log(res);
-            getPlaceDetails();
-        });
+        .then(res => getPlaceDetails(res));
     return {
         lat: upcomingTripDetails.latitude,
         lng: upcomingTripDetails.longitude
