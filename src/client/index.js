@@ -11,6 +11,7 @@ import 'regenerator-runtime/runtime';
 // import css
 import './styles/base.sass';
 import './styles/button.sass';
+import './styles/card.sass';
 import './styles/style.scss';
 
 // Need to install event handlers here, since they would not be

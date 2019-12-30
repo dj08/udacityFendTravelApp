@@ -75,7 +75,7 @@ function createUiNewTravelCard () {
     const tripDetailsDivHolder = document.getElementById('upcoming-trip-holder');
     
     const tripCard = document.createElement('div');
-    // tripCard.id = 'upcoming-trip-details';
+    tripCard.id = 'upcoming-trip-details';
 
     const tripLocation = document.createElement('h2');
     tripLocation.id = 'upcoming-trip-location';
@@ -91,13 +91,13 @@ function createUiNewTravelCard () {
     const placeImg = document.createElement('img');
     placeImg.id = 'place-img';
 
-    tripCard.appendChild(placeImg);
     tripCard.appendChild(tripLocation);
     tripCard.appendChild(tripDays);
     tripCard.appendChild(tripWeather);
 
     // Refresh div before inserting HTML
     tripDetailsDivHolder.innerHTML = '';
+    tripDetailsDivHolder.appendChild(placeImg);
     tripDetailsDivHolder.appendChild(tripCard);
 }
 

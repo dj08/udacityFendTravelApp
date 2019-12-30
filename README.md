@@ -13,6 +13,10 @@ UI.
 
 The full rubric for the project is available [here](https://review.udacity.com/#!/rubrics/2669/view "Link to Udacity's Rubric for the project").
 
+Sample responsive outputs for desktop and mobile:
+![Desktop Example Search](./example_app_display_desktop.png)
+![Mobile Example Search](./example_app_display_mobile.png)
+
 ## Using the code
 1. Start the app using the following command sequence:
 ```
