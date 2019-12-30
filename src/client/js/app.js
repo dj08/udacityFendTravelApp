@@ -35,6 +35,11 @@ const pixabayUrl = 'https://pixabay.com/api/?category=places&key=';
 const pixabayKey = '14764674-6073320ee678de9704f2a472c';
 /* eslint-enable */
 
+// Setup for REST Countries API -- one of the 'Extend your Project
+// Further' recommendations.
+const countriesUrl = 'https://restcountries.eu/rest/v2/alpha/';
+const countriesQuery = countryCode => `${countriesUrl}${countryCode}`;
+
 // Helper function to handle initial form input interaction
 const updateEntryHelp = text =>
     document.getElementById('whats-happening').innerHTML = text;
@@ -154,6 +159,26 @@ L: ${placeInfo.tempLow} F, H: ${placeInfo.tempHigh} F
     }
 }
 
+// Function to get full country name from REST Countries API
+export async function getFullCountryName (data) {
+    const countryCode = data.country;
+    await (fetch(countriesQuery(countryCode)))
+          .then(res => res.json())
+          .then(res => {
+              data.country = res.name;
+              upcomingTripDetails.country = res.name;
+          })
+          .catch(err => presentErr("Country's Full name fetch failed: ", err));
+
+    return data;
+}
+
+async function uiUpdatePlaceName(data) {
+    document.getElementById('upcoming-trip-location').innerHTML =
+        `${data.place}, ${data.country}`;
+    return data;
+}
+
 async function getLocationCoordinates () {
     const location = document.getElementById('travel-to-city').value;
     fetch(coordQueryUrl(location, geonamesUser))
@@ -166,11 +191,14 @@ async function getLocationCoordinates () {
             upcomingTripDetails.longitude = place.lng;
             upcomingTripDetails.place = city;
             upcomingTripDetails.country = country;
-            document.getElementById('upcoming-trip-location').innerHTML =
-                `${city}, ${country}`;
-            return {lat: place.lat, lng: place.lng, place: city};
+            return {lat: place.lat, lng: place.lng,
+                    place: city, country: country};
         })
-        .then(res => getPlaceDetails(res));
+        .then(res => getFullCountryName(res))
+        .then(res => uiUpdatePlaceName(res))
+        .then(res => getPlaceDetails(res))
+        .catch(err =>
+               presentErr("Something went wrong in fetching API results: ", err));
     return {
         lat: upcomingTripDetails.latitude,
         lng: upcomingTripDetails.longitude
