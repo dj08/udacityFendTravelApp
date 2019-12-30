@@ -1,49 +1,50 @@
-#app{
-    display: grid;
-    grid-auto-rows: minmax(150px, auto);
-    /* grid-template-columns:  */
-    justify-content: center;
-    grid-gap: 1em;
-    font-size: 20px;
-    font-family: 'Oswald', sans-serif;
-}
+// #app{
+//     display: grid;
+//     grid-auto-rows: minmax(150px, auto);
+//     /* grid-template-columns:  */
+//     justify-content: center;
+//     grid-gap: 1em;
+//     font-size: 20px;
+//     font-family: 'Oswald', sans-serif;
+// }
 
-label{
-    display:block;
-    font-size: 27px;
-}
+// label{
+//     display:block;
+//     font-size: 27px;
+// }
 
-button{
-    display: flex;
-    font-size: 26px;
-    font-family: 'Oswald', sans-serif;
-    border: none;
-    box-shadow: 2px 4px 5px #444;
-}
+// button{
+//     display: flex;
+//     font-size: 26px;
+//     font-family: 'Oswald', sans-serif;
+//     border: none;
+//     box-shadow: 2px 4px 5px #444;
+// }
 
-textarea{
-    font-size: 20px;
-    font-family: 'Oswald', sans-serif;
-}
+// textarea{
+//     font-size: 20px;
+//     font-family: 'Oswald', sans-serif;
+// }
 
-/* Reset style for HTML element on active to have no border*/
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-    outline: none;
-}
-/* Style for Placeholder Text*/
-::placeholder { /* Firefox, Chrome, Opera */ 
-    font-family: 'Oswald', sans-serif;
+// /* Reset style for HTML element on active to have no border*/
+// input:focus,
+// select:focus,
+// textarea:focus,
+// button:focus {
+//     outline: none;
+// }
+// /* Style for Placeholder Text*/
+// ::placeholder { /* Firefox, Chrome, Opera */ 
+//     font-family: 'Oswald', sans-serif;
 
-} 
+// } 
   
-:-ms-input-placeholder { /* Internet Explorer 10-11 */ 
-    font-family: 'Oswald', sans-serif;
+// :-ms-input-placeholder { /* Internet Explorer 10-11 */ 
+//     font-family: 'Oswald', sans-serif;
 
-} 
+// } 
   
-::-ms-input-placeholder { /* Microsoft Edge */ 
-    font-family: 'Oswald', sans-serif;
-} 
+// ::-ms-input-placeholder { /* Microsoft Edge */ 
+//     font-family: 'Oswald', sans-serif;
+// } 
+

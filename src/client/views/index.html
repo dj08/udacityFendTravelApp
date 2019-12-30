@@ -3,17 +3,13 @@
   <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Journal</title>
-    <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id = "app">
       <h1 class ="headline">
         Travel Planner App
       </h1>
-
-      <div class="travel-details" id="upcoming-trip-holder">
-        <!-- Upcoming itinerary information -->
-      </div>
 
       <div class="travel-details" id="new-trip-details">
         <!-- new location input entry form -->
@@ -22,17 +18,23 @@
         </div>
         <div class="city-details">
           <label for="new-city">My trip to:</label>
-          <input type="new-text" id="travel-to-city" placeholder="Enter Location Here">
+          <input type="new-text" id="travel-to-city"
+		 placeholder="Enter Location Here">
+	  <span class="focus-border">
         </div>
         <div class="date-entry">
           <label for="travel-date">Departing:</label>
+	  <span class="focus-border">
           <input type="date" id="new-travel-date" min="2019-12-28"
                  max="2020-12-28" disabled>
         </div>
         <button name="button" id="save-trip-button" disabled>Save Trip</button>
       </div>
+      <div class="travel-details" id="upcoming-trip-holder">
+	<!-- Upcoming itinerary information -->
+      </div>
     </div>
-    
+
     <script>
       // Check that service workers are supported
       if ('serviceWorker' in navigator) {

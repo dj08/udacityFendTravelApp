@@ -1,21 +1,45 @@
 /*  Basic Styling To Override Default For Basic HTML Elements */
+$font-family: 'Lato', sans-serif
+$input-color: #c0c0c0
+
+*
+  border: 10px
+  padding: 10px
+  font-family: $font-family
+
 body
   display: flex
   flex-direction: column
   min-height: 100em
-  background: url('https://pixabay.com/get/55e4d3444b52b108f5d0846082293379133bd6ed574c704c72287dd19248c151/cloud-346710_1280.png')
 
 input
   padding: 5px 20px
   width: 100%
   line-height: 16px
   margin: 10px 0  
-  display:block
-  height: 60px
-  width: 320px
-  font-size: 20px
-  font-family: 'Oswald', sans-serif
+  display: block
   border: none
+  border-bottom: 1px solid #ffffff
+  background: $input-color
+  padding: 10px 10px 10px 5px
+  transition: 0.4s
 
-.upcoming-trip-details
-  visibility: hidden
+  &:hover:enabled
+    background: lighten($input-color, 20%)
+    border-bottom: 1px solid #757575
+
+  &:focus
+    background: lighten($input-color, 40%)
+    outline:none
+    border-bottom: 1px solid #757575
+    &~ .focus-border
+       width: 100%
+       transition: 0.4s
+
+  &~ .focus-border
+    position: relative
+    bottom: 0
+    left: 0
+    width: 0
+    height: 2px
+    transition: 0.4s
