@@ -160,8 +160,8 @@ async function getPlaceDetails () {
 Forecast: ${placeInfo.summary}
 L: ${placeInfo.tempLow} F, H: ${placeInfo.tempHigh} F
         `;
-	document.getElementById('place-img').src =
-	    placeInfo.image;
+        document.getElementById('place-img').src =
+            placeInfo.image;
     } catch(err) {
         presentErr('Failed to location details: ', err);
     }
@@ -199,8 +199,7 @@ export const calcDays = date =>
 function getRemainingDays () {
     upcomingTripDetails.departure =
         document.getElementById('new-travel-date').valueAsNumber;
-    console.log('Entered date: ', upcomingTripDetails.departure);
-    daysToGo = calcDays(upcomingTripDetails.departure);
+    const daysToGo = calcDays(upcomingTripDetails.departure);
     document.getElementById('days-to-go').innerHTML =
         `${daysToGo} days to go!`; 
 }
